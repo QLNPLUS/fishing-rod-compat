@@ -53,3 +53,9 @@ Use JDK 21:
 The output is `build/libs/fishing_rod_compat-0.8.0.jar`.
 
 Copy that JAR into the instance's `mods` directory alongside Tide and Aquaculture. The included files under `libs` are compile/runtime dependencies for the development project and are not bundled into the output JAR.
+
+## License
+
+Original source code and project files are All Rights Reserved (ARR). See [LICENSE](LICENSE).
+
+Third-party dependencies and bundled third-party assets remain under their respective licenses.
