@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "fishing_rod_compat:aquaculture_iron_fishing_rod",
+    "fishing_rod_compat:aquaculture_gold_fishing_rod",
+    "fishing_rod_compat:aquaculture_diamond_fishing_rod",
+    "fishing_rod_compat:aquaculture_neptunium_fishing_rod"
+  ]
+}

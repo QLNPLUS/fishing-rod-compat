@@ -1,0 +1,28 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "local.fishingrodcompat.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "AquaFishingRodItemMixin",
+    "RecipeManagerMixin",
+    "SlotFishingRodMixin",
+    "SlotHidableMixin",
+    "TackleBoxBlockEntityMixin",
+    "TackleBoxBlockEntityHandlerMixin",
+    "TackleBoxContainerMixin",
+    "TackleHookSlotMixin",
+    "TackleBaitSlotMixin",
+    "TackleLineSlotMixin",
+    "TackleBobberSlotMixin",
+    "TideFishingRodItemMixin",
+    "BaitContentsMutableAccessor",
+    "AquacultureWormStackSizeMixin",
+    "TideFishingHookEffectsMixin",
+    "TideFishingBobberItemMixin",
+    "TideFishingHookItemMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

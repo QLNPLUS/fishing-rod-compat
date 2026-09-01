@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "fishing_rod_compat:aquaculture_iron_hook",
+    "fishing_rod_compat:aquaculture_gold_hook",
+    "fishing_rod_compat:aquaculture_diamond_hook",
+    "fishing_rod_compat:aquaculture_light_hook",
+    "fishing_rod_compat:aquaculture_heavy_hook",
+    "fishing_rod_compat:aquaculture_double_hook",
+    "fishing_rod_compat:aquaculture_redstone_hook",
+    "fishing_rod_compat:aquaculture_note_hook",
+    "fishing_rod_compat:aquaculture_nether_star_hook"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "fishing_rod_compat:aquaculture_iron_hook"
+    },
+    {
+      "item": "minecraft:note_block"
+    }
+  ],
+  "result": {
+    "id": "fishing_rod_compat:aquaculture_note_hook"
+  }
+}
