@@ -1,8 +1,11 @@
 package local.fishingrodcompat;
 
+import local.fishingrodcompat.compat.StardewFishingCompat;
 import local.fishingrodcompat.registry.CompatItems;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -22,6 +25,10 @@ public final class FishingRodCompatMod {
     public FishingRodCompatMod(IEventBus modEventBus) {
         CompatItems.ITEMS.register(modEventBus);
         modEventBus.addListener(FishingRodCompatMod::addCreativeItems);
+
+        if (ModList.get().isLoaded("stardew_fishing")) {
+            NeoForge.EVENT_BUS.register(StardewFishingCompat.INSTANCE);
+        }
     }
 
     private static void addCreativeItems(BuildCreativeModeTabContentsEvent event) {
