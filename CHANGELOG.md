@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.1
+
+### Fixed
+
+- Fixed AutoFish compatibility with Tide fishing rods so the rod no longer retracts immediately before a bite.
+
 ## 0.9.0
 
 ### Added

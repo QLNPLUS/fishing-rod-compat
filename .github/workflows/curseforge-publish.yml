@@ -50,9 +50,9 @@ jobs:
 
       - name: Verify Forge artifact and changelog
         run: |
-          expected="build/libs/fishing_rod_compat-0.9.0.jar"
+          expected="build/libs/fishing_rod_compat-0.9.1.jar"
           test -f "$expected"
-          awk '/^##[[:space:]]+/ { heading=$2; gsub(/^\[/,"",heading); gsub(/\].*$/, "", heading); if (found && heading != "0.9.0") exit; if (heading == "0.9.0") found=1 } found { print }' CHANGELOG.md > build/curseforge-changelog.md
+          awk '/^##[[:space:]]+/ { heading=$2; gsub(/^\[/,"",heading); gsub(/\].*$/, "", heading); if (found && heading != "0.9.1") exit; if (heading == "0.9.1") found=1 } found { print }' CHANGELOG.md > build/curseforge-changelog.md
           test -s build/curseforge-changelog.md
 
       - name: Publish Forge 1.20.1
@@ -60,9 +60,9 @@ jobs:
         with:
           curseforge-id: ${{ vars.CURSEFORGE_PROJECT_ID }}
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-          files: build/libs/fishing_rod_compat-0.9.0.jar
-          version: 0.9.0
-          name: fishing_rod_compat-0.9.0-forge-1.20.1
+          files: build/libs/fishing_rod_compat-0.9.1.jar
+          version: 0.9.1
+          name: fishing_rod_compat-0.9.1-forge-1.20.1
           version-type: release
           changelog-file: build/curseforge-changelog.md
           loaders: forge
@@ -102,9 +102,9 @@ jobs:
 
       - name: Verify NeoForge artifact and changelog
         run: |
-          expected="build/libs/fishing_rod_compat-0.9.0.jar"
+          expected="build/libs/fishing_rod_compat-0.9.1.jar"
           test -f "$expected"
-          awk '/^##[[:space:]]+/ { heading=$2; gsub(/^\[/,"",heading); gsub(/\].*$/, "", heading); if (found && heading != "0.9.0") exit; if (heading == "0.9.0") found=1 } found { print }' CHANGELOG.md > build/curseforge-changelog.md
+          awk '/^##[[:space:]]+/ { heading=$2; gsub(/^\[/,"",heading); gsub(/\].*$/, "", heading); if (found && heading != "0.9.1") exit; if (heading == "0.9.1") found=1 } found { print }' CHANGELOG.md > build/curseforge-changelog.md
           test -s build/curseforge-changelog.md
 
       - name: Publish NeoForge 1.21.1
@@ -112,9 +112,9 @@ jobs:
         with:
           curseforge-id: ${{ vars.CURSEFORGE_PROJECT_ID }}
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-          files: build/libs/fishing_rod_compat-0.9.0.jar
-          version: 0.9.0
-          name: fishing_rod_compat-0.9.0-neoforge-1.21.1
+          files: build/libs/fishing_rod_compat-0.9.1.jar
+          version: 0.9.1
+          name: fishing_rod_compat-0.9.1-neoforge-1.21.1
           version-type: release
           changelog-file: build/curseforge-changelog.md
           loaders: neoforge
