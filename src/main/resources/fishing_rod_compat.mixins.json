@@ -20,7 +20,9 @@
     "AquacultureWormStackSizeMixin",
     "TideFishingHookEffectsMixin",
     "TideFishingBobberItemMixin",
-    "TideFishingHookItemMixin"
+    "TideFishingHookItemMixin",
+    "TideHookAccessorMixin",
+    "FishingHookMovementMixin"
   ],
   "injectors": {
     "defaultRequire": 1
