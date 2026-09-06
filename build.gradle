@@ -1,8 +1,21 @@
-plugins {
-    id 'java-library'
-    id 'maven-publish'
-    id 'net.neoforged.moddev' version '2.0.141'
+buildscript {
+    repositories {
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+    }
 }
+
+plugins {
+    id 'eclipse'
+    id 'idea'
+    id 'maven-publish'
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+}
+
+apply plugin: 'org.spongepowered.mixin'
 
 version = mod_version
 group = mod_group_id
@@ -11,55 +24,71 @@ base {
     archivesName = mod_id
 }
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
-neoForge {
-    version = neo_version
+minecraft {
+    mappings channel: 'official', version: minecraft_version
+    copyIdeResources = true
 
     runs {
+        configureEach {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            mods {
+                fishing_rod_compat {
+                    source sourceSets.main
+                }
+            }
+        }
         client {
-            client()
         }
         server {
-            server()
+            args '--nogui'
         }
     }
+}
 
-    mods {
-        "${mod_id}" {
-            sourceSet sourceSets.main
-        }
-    }
+mixin {
+    add sourceSets.main, 'fishing_rod_compat.refmap.json'
+    config 'fishing_rod_compat.mixins.json'
 }
 
 repositories {
-    maven {
-        name = 'NeoForge'
-        url = 'https://maven.neoforged.net/releases/'
-    }
-    maven {
-        name = 'SpongePowered'
-        url = 'https://repo.spongepowered.org/repository/maven-public/'
-    }
+    maven { name = 'MinecraftForge'; url = 'https://maven.minecraftforge.net/' }
+    maven { name = 'SpongePowered'; url = 'https://repo.spongepowered.org/repository/maven-public/' }
 }
 
 dependencies {
-    compileOnly files('libs/tide-neoforge-1.21.1-2.1.1.jar')
-    runtimeOnly files('libs/tide-neoforge-1.21.1-2.1.1.jar')
-    compileOnly files('libs/aquaculture-1.21.1-2.7.21.jar')
-    runtimeOnly files('libs/aquaculture-1.21.1-2.7.21.jar')
-    runtimeOnly files('libs/cloth-config-15.0.140-neoforge.jar')
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+
+    def tide = fg.deobf(files('libs/tide-forge-1.20.1-2.1.1-hotfix.jar'))
+    def aquaculture = fg.deobf(files('libs/aquaculture-forge-1.20.1-2.5.5.jar'))
+    def clothConfig = fg.deobf(files('libs/cloth-config-11.1.136-forge.jar'))
+    def stardewFishing = fg.deobf(files('libs/stardew-fishing-3.7-1.20.1.jar'))
+
+    compileOnly tide
+    runtimeOnly tide
+    compileOnly aquaculture
+    runtimeOnly aquaculture
+    compileOnly clothConfig
+    runtimeOnly clothConfig
+    compileOnly stardewFishing
+    runtimeOnly stardewFishing
 
     compileOnly 'org.spongepowered:mixin:0.8.5'
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
 
 tasks.named('processResources', ProcessResources).configure {
-    var replaceProperties = [
+    def replaceProperties = [
             minecraft_version: minecraft_version,
             minecraft_version_range: minecraft_version_range,
-            neo_version: neo_version,
-            neo_version_range: neo_version_range,
+            forge_version: forge_version,
+            forge_version_range: forge_version_range,
+            loader_version_range: loader_version_range,
             mod_id: mod_id,
             mod_name: mod_name,
             mod_license: mod_license,
@@ -69,7 +98,7 @@ tasks.named('processResources', ProcessResources).configure {
     ]
     inputs.properties replaceProperties
 
-    filesMatching('META-INF/neoforge.mods.toml') {
+    filesMatching('META-INF/mods.toml') {
         expand replaceProperties
     }
 }
@@ -87,11 +116,7 @@ tasks.named('jar', Jar).configure {
                 'MixinConfigs'            : "${mod_id}.mixins.json"
         ])
     }
-}
-
-tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8'
-    options.release = 21
+    finalizedBy 'reobfJar'
 }
 
 publishing {
@@ -105,4 +130,8 @@ publishing {
             url = layout.buildDirectory.dir('repo')
         }
     }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
 }

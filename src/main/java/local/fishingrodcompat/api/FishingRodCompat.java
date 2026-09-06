@@ -1,12 +1,14 @@
 package local.fishingrodcompat.api;
 
 import local.fishingrodcompat.adapter.TideRodEquipmentHandler;
+import com.teammetallurgy.aquaculture.api.fishing.Hook;
 import com.teammetallurgy.aquaculture.init.AquaItems;
 import com.li64.tide.data.rods.CustomRodManager;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.items.IItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import com.li64.tide.registries.items.TideFishingRodItem;
 import local.fishingrodcompat.item.AquaStyledTideFishingRodItem;
 import net.minecraft.world.phys.Vec3;
@@ -55,6 +57,10 @@ public final class FishingRodCompat {
 
     public static boolean isAquacultureWorm(ItemStack stack) {
         return !stack.isEmpty() && stack.getItem() == AquaItems.WORM.get();
+    }
+
+    public static Item getAquacultureHook(String name) {
+        return Hook.HOOKS.get(name).get();
     }
 
     public static boolean isAquaTideHookItem(ItemStack stack, String hookName) {
@@ -111,15 +117,19 @@ public final class FishingRodCompat {
         return isDisabledAquacultureRod(stack)
                 || stack.getItem() == AquaItems.FISHING_LINE.get()
                 || stack.getItem() == AquaItems.BOBBER.get()
-                || stack.getItem() == AquaItems.IRON_HOOK.get()
-                || stack.getItem() == AquaItems.GOLD_HOOK.get()
-                || stack.getItem() == AquaItems.DIAMOND_HOOK.get()
-                || stack.getItem() == AquaItems.LIGHT_HOOK.get()
-                || stack.getItem() == AquaItems.HEAVY_HOOK.get()
-                || stack.getItem() == AquaItems.DOUBLE_HOOK.get()
-                || stack.getItem() == AquaItems.REDSTONE_HOOK.get()
-                || stack.getItem() == AquaItems.NOTE_HOOK.get()
-                || stack.getItem() == AquaItems.NETHER_STAR_HOOK.get();
+                || isAquacultureHook(stack, "iron")
+                || isAquacultureHook(stack, "gold")
+                || isAquacultureHook(stack, "diamond")
+                || isAquacultureHook(stack, "light")
+                || isAquacultureHook(stack, "heavy")
+                || isAquacultureHook(stack, "double")
+                || isAquacultureHook(stack, "redstone")
+                || isAquacultureHook(stack, "note")
+                || isAquacultureHook(stack, "nether_star");
+    }
+
+    private static boolean isAquacultureHook(ItemStack stack, String name) {
+        return !stack.isEmpty() && stack.getItem() == getAquacultureHook(name);
     }
 
     public static boolean isDisabledAquacultureRecipe(net.minecraft.resources.ResourceLocation id) {

@@ -4,10 +4,12 @@ import com.li64.tide.client.TideItemModelProperties;
 import local.fishingrodcompat.FishingRodCompatMod;
 import local.fishingrodcompat.registry.CompatItems;
 import net.minecraft.client.renderer.item.ItemProperties;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraft.world.item.Item;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.registries.RegistryObject;
 
 @EventBusSubscriber(
         modid = FishingRodCompatMod.MOD_ID,
@@ -29,7 +31,7 @@ public final class FishingRodCompatClient {
     }
 
     private static void registerCastProperty(
-            net.neoforged.neoforge.registries.DeferredItem<?> item
+            RegistryObject<? extends Item> item
     ) {
         ItemProperties.register(
                 item.get(),

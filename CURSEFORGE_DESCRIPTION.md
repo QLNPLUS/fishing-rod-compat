@@ -2,13 +2,13 @@
 
 ## One-Sentence Description
 
-Brings Aquaculture-styled fishing rods and tackle accessories to Tide's fishing system on NeoForge 1.21.1.
+Brings Aquaculture-styled fishing rods and tackle accessories to Tide's fishing system on Forge 1.20.1.
 
 ## Full Description
 
 Fishing Rod Compat bridges **Aquaculture** and **Tide**, replacing Aquaculture's fishing rods and tackle accessories with Tide-based items that keep Aquaculture's familiar appearance and gameplay identity.
 
-The mod is designed for NeoForge 1.21.1 and requires **Tide 2.1.1 or newer** and **Aquaculture 2.7.21 or newer**.
+The mod is designed for Forge 1.20.1 and requires **Tide 2.1.1 or newer** and **Aquaculture 2.5.5 or newer**.
 
 ## Features
 
@@ -43,9 +43,9 @@ The replacement hooks map the original Aquaculture effects onto Tide's fishing h
 
 ## Installation
 
-1. Install NeoForge for Minecraft 1.21.1.
+1. Install Forge for Minecraft 1.20.1.
 2. Install Tide 2.1.1 or newer.
-3. Install Aquaculture 2.7.21 or newer.
+3. Install Aquaculture 2.5.5 or newer.
 4. Place the Fishing Rod Compat JAR in the instance's `mods` folder.
 
 ## Item IDs

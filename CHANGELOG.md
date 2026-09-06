@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.9.0
+
+### Added
+
+- Added Stardew Fishing 3.7 compatibility for Forge 1.20.1.
+- Added direct inventory right-click installation for the replacement bobber.
+
+### Changed
+
+- Aquaculture worms retain their 20-durability, non-stackable behavior.
+- Successful Tide and Stardew catches now consume worm durability consistently.
+- No-durability bait falls back to count-based consumption.
+
+### Compatibility
+
+- Requires Forge 1.20.1, Tide 2.1.1 or newer, and Aquaculture 2.5.5 or newer.
+
 ## 0.8.0
 
 ### Added
@@ -24,7 +41,7 @@
 
 ### Compatibility
 
-- Requires NeoForge 1.21.1.
+- Requires Forge 1.20.1.
 - Requires Tide 2.1.1 or newer.
-- Requires Aquaculture 2.7.21 or newer.
+- Requires Aquaculture 2.5.5 or newer.
 - Tide data packs can still customize fishing tables, loot, conditions, and accessory tags.

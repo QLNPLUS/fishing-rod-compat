@@ -21,7 +21,7 @@ public abstract class TideFishingHookItemMixin {
                 && itemId.getPath().startsWith("aquaculture_")
                 && itemId.getPath().endsWith("_hook")) {
             String texture = itemId.getPath().substring("aquaculture_".length());
-            callbackInfo.setReturnValue(ResourceLocation.fromNamespaceAndPath(
+            callbackInfo.setReturnValue(new ResourceLocation(
                     "aquaculture",
                     "textures/entity/rod/hook/" + texture + ".png"
             ));

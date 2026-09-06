@@ -3,6 +3,7 @@ package local.fishingrodcompat.mixin;
 import com.li64.tide.data.rods.BaitContents;
 import com.li64.tide.registries.entities.misc.fishing.TideFishingHook;
 import local.fishingrodcompat.api.FishingRodCompat;
+import local.fishingrodcompat.compat.TideBaitConsumption;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -21,7 +22,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 
 @Mixin(value = TideFishingHook.class, remap = false)
 public abstract class TideFishingHookEffectsMixin {
@@ -59,7 +59,7 @@ public abstract class TideFishingHookEffectsMixin {
         }
     }
 
-    @Inject(method = "tick", at = @At("RETURN"), remap = false)
+    @Inject(method = "m_8119_", at = @At("RETURN"), remap = false)
     private void fishingRodCompat$expandRedstoneCatchWindow(CallbackInfo callbackInfo) {
         TideFishingHook hook = (TideFishingHook) (Object) this;
         if (nibble <= 0) {
@@ -71,7 +71,7 @@ public abstract class TideFishingHookEffectsMixin {
         }
     }
 
-    @Inject(method = "tick", at = @At("RETURN"), remap = false)
+    @Inject(method = "m_8119_", at = @At("RETURN"), remap = false)
     private void fishingRodCompat$playNoteHookSound(CallbackInfo callbackInfo) {
         TideFishingHook hook = (TideFishingHook) (Object) this;
         if (nibble <= 0) {
@@ -105,7 +105,7 @@ public abstract class TideFishingHookEffectsMixin {
                 && !hookedItems.isEmpty()
                 && hook.getRandom().nextDouble() <= 0.1D) {
             List<ItemStack> catches = new ArrayList<>(hookedItems);
-            catches.add(hookedItems.getFirst().copy());
+            catches.add(hookedItems.get(0).copy());
             hookedItems = catches;
         }
     }
@@ -139,30 +139,6 @@ public abstract class TideFishingHookEffectsMixin {
             remap = false
     )
     private void fishingRodCompat$consumeBait(BaitContents.Mutable mutable) {
-        List<ItemStack> items = ((BaitContentsMutableAccessor) (Object) mutable).fishingRodCompat$getItems();
-        for (ListIterator<ItemStack> iterator = items.listIterator(); iterator.hasNext(); ) {
-            ItemStack bait = iterator.next();
-            if (FishingRodCompat.isAquacultureWorm(bait)) {
-                // Aquaculture's worm is durability-based despite exposing a stack size of 64.
-                bait.setCount(1);
-                if (bait.isDamageableItem()) {
-                    if (bait.getDamageValue() + 1 >= bait.getMaxDamage()) {
-                        iterator.remove();
-                    } else {
-                        bait.setDamageValue(bait.getDamageValue() + 1);
-                    }
-                } else {
-                    bait.shrink(1);
-                    if (bait.isEmpty()) {
-                        iterator.remove();
-                    }
-                }
-            } else {
-                bait.shrink(1);
-                if (bait.isEmpty()) {
-                    iterator.remove();
-                }
-            }
-        }
+        TideBaitConsumption.consume(mutable);
     }
 }

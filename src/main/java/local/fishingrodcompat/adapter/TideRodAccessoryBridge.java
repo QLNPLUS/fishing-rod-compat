@@ -7,6 +7,7 @@ import com.li64.tide.util.BaitUtils;
 import local.fishingrodcompat.api.FishingRodCompat;
 import local.fishingrodcompat.api.RodAccessoryBridge;
 import local.fishingrodcompat.api.RodAccessorySlot;
+import local.fishingrodcompat.registry.CompatItems;
 import com.li64.tide.registries.items.TideFishingRodItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -40,13 +41,14 @@ public final class TideRodAccessoryBridge implements RodAccessoryBridge {
             case HOOK -> accessory.is(HOOKS);
             case BAIT -> accessory.is(BAITS) || BaitUtils.isBait(accessory);
             case LINE -> accessory.is(LINES);
-            case BOBBER -> accessory.is(BOBBERS);
+            case BOBBER -> accessory.is(BOBBERS)
+                    || accessory.getItem() == CompatItems.AQUACULTURE_BOBBER.get();
         };
     }
 
     @Override
     public int getSlotLimit(RodAccessorySlot slot) {
-        return slot == RodAccessorySlot.BAIT ? Item.DEFAULT_MAX_STACK_SIZE : 1;
+        return slot == RodAccessorySlot.BAIT ? 64 : 1;
     }
 
     @Override
@@ -117,7 +119,7 @@ public final class TideRodAccessoryBridge implements RodAccessoryBridge {
 
         if (first >= 0) {
             ItemStack current = items.get(first);
-            if (!ItemStack.isSameItemSameComponents(current, incoming) || !current.isStackable()) {
+            if (!ItemStack.isSameItemSameTags(current, incoming) || !current.isStackable()) {
                 return incoming.copy();
             }
 
@@ -223,6 +225,6 @@ public final class TideRodAccessoryBridge implements RodAccessoryBridge {
     }
 
     private static TagKey<Item> tag(String path) {
-        return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("tide", path));
+        return TagKey.create(Registries.ITEM, new ResourceLocation("tide", path));
     }
 }

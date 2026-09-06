@@ -1,8 +1,9 @@
 {
   "required": true,
   "minVersion": "0.8",
+  "refmap": "fishing_rod_compat.refmap.json",
   "package": "local.fishingrodcompat.mixin",
-  "compatibilityLevel": "JAVA_21",
+  "compatibilityLevel": "JAVA_17",
   "mixins": [
     "AquaFishingRodItemMixin",
     "RecipeManagerMixin",

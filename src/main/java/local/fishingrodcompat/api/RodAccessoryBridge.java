@@ -43,7 +43,7 @@ public interface RodAccessoryBridge {
             return incoming.copyWithCount(incoming.getCount() - accepted);
         }
 
-        if (!ItemStack.isSameItemSameComponents(current, incoming) || !current.isStackable()) {
+        if (!ItemStack.isSameItemSameTags(current, incoming) || !current.isStackable()) {
             return incoming.copy();
         }
 

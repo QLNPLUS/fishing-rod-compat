@@ -17,7 +17,7 @@ public abstract class TideFishingBobberItemMixin {
             CallbackInfoReturnable<ResourceLocation> callbackInfo
     ) {
         if (stack.getItem() == CompatItems.AQUACULTURE_BOBBER.get()) {
-            callbackInfo.setReturnValue(ResourceLocation.fromNamespaceAndPath(
+            callbackInfo.setReturnValue(new ResourceLocation(
                     "aquaculture",
                     "textures/entity/rod/bobber/bobber.png"
             ));

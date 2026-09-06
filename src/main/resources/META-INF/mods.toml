@@ -1,6 +1,6 @@
 modLoader="javafml"
-loaderVersion="[4,)"
-license="ARR"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
 
 [[mods]]
 modId="${mod_id}"
@@ -13,29 +13,33 @@ description='''${mod_description}'''
 config="fishing_rod_compat.mixins.json"
 
 [[dependencies.${mod_id}]]
-modId="neoforge"
-type="required"
-versionRange="${neo_version_range}"
+modId="forge"
+mandatory=true
+versionRange="${forge_version_range}"
 ordering="NONE"
 side="BOTH"
 
 [[dependencies.${mod_id}]]
 modId="minecraft"
-type="required"
+mandatory=true
 versionRange="${minecraft_version_range}"
 ordering="NONE"
 side="BOTH"
-
 [[dependencies.${mod_id}]]
 modId="tide"
-type="required"
+mandatory=true
 versionRange="[2.1.1,)"
 ordering="AFTER"
 side="BOTH"
-
 [[dependencies.${mod_id}]]
 modId="aquaculture"
-type="required"
-versionRange="[2.7.21,)"
+mandatory=true
+versionRange="[2.5.5,)"
+ordering="AFTER"
+side="BOTH"
+[[dependencies.${mod_id}]]
+modId="stardew_fishing"
+mandatory=false
+versionRange="[3.7,)"
 ordering="AFTER"
 side="BOTH"

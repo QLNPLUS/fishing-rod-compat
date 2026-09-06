@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value = AquaFishingRodItem.class, remap = false)
 public abstract class AquaFishingRodItemMixin {
-    @Inject(method = "use", at = @At("HEAD"), cancellable = true, remap = false)
+    @Inject(method = "m_7203_", at = @At("HEAD"), cancellable = true, remap = false)
     private void fishingRodCompat$disableOriginalRod(
             Level level,
             Player player,
