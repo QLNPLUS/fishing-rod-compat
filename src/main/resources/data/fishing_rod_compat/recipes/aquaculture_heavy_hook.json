@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " I ",
+    "IHI",
+    " I "
+  ],
+  "key": {
+    "I": {
+      "tag": "c:nuggets/iron"
+    },
+    "H": {
+      "item": "fishing_rod_compat:aquaculture_iron_hook"
+    }
+  },
+  "result": {
+    "item": "fishing_rod_compat:aquaculture_heavy_hook"
+  }
+}

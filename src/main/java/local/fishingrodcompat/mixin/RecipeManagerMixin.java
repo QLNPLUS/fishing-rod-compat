@@ -17,17 +17,14 @@ import java.util.Map;
 public abstract class RecipeManagerMixin {
     @Inject(
             method = "apply(Ljava/util/Map;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)V",
-            at = @At("RETURN")
+            at = @At("HEAD")
     )
-    private void fishingRodCompat$removeDisabledRecipes(
+    private void fishingRodCompat$filterDisabledRecipeJson(
             Map<ResourceLocation, JsonElement> recipes,
             ResourceManager resourceManager,
             ProfilerFiller profiler,
             CallbackInfo callbackInfo
     ) {
-        RecipeManager manager = (RecipeManager) (Object) this;
-        manager.replaceRecipes(manager.getRecipes().stream()
-                .filter(recipe -> !FishingRodCompat.isDisabledAquacultureRecipe(recipe.getId()))
-                .toList());
+        recipes.entrySet().removeIf(entry -> FishingRodCompat.isDisabledAquacultureRecipe(entry.getKey(), entry.getValue()));
     }
 }

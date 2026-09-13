@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " D ",
+    "DHD",
+    " D "
+  ],
+  "key": {
+    "D": {
+      "tag": "c:gems/diamond"
+    },
+    "H": {
+      "item": "fishing_rod_compat:aquaculture_iron_hook"
+    }
+  },
+  "result": {
+    "item": "fishing_rod_compat:aquaculture_diamond_hook"
+  }
+}

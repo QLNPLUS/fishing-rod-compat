@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " R ",
+    "RHR",
+    " R "
+  ],
+  "key": {
+    "R": {
+      "tag": "c:dusts/redstone"
+    },
+    "H": {
+      "item": "fishing_rod_compat:aquaculture_iron_hook"
+    }
+  },
+  "result": {
+    "item": "fishing_rod_compat:aquaculture_redstone_hook"
+  }
+}

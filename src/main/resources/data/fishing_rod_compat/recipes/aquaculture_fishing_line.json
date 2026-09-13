@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    "SIS",
+    " S "
+  ],
+  "key": {
+    "I": {
+      "tag": "c:ingots/iron"
+    },
+    "S": {
+      "tag": "c:strings"
+    }
+  },
+  "result": {
+    "item": "fishing_rod_compat:aquaculture_fishing_line"
+  }
+}
