@@ -2,11 +2,11 @@
 
 NeoForge 1.21.1 compatibility mod for Tide 2.1.1 and Aquaculture 2.7.21.
 
-## Version 0.9.0
+## Version 1.0
 
 This version replaces Aquaculture's fishing rods and tackle accessories with separate items that use Tide's fishing system while keeping Aquaculture's appearance. The original Aquaculture rods, bobber, line, and hooks are hidden, cannot be used in the tackle box, and their recipes are removed from the loaded recipe list.
 
-The replacement rods use Tide's native bait list, accessories, fishing entities, fishing tables, conditions, minigame, and bait-slot tooltip. The Diamond rod has two bait slots, and the Neptunium rod has four bait slots. Both keep their corresponding Aquaculture rod durability. The Neptunium rod adds `+10` Tide lure speed when it creates the Tide fishing hook, making fish bite sooner without using Aquaculture's separate fishing entity. Its tooltip uses Tide's gold bonus-text style.
+The replacement rods use Tide's native bait list, accessories, fishing entities, fishing tables, conditions, minigame, and bait-slot tooltip. The Diamond rod has two bait slots, and the Neptunium rod has four bait slots. Both keep their corresponding Aquaculture rod durability. The Neptunium rod adds `+1` Tide lure speed when it creates the Tide fishing hook, making fish bite sooner without forcing Tide's minimum bite timer. Its tooltip uses Tide's gold bonus-text style.
 
 `aquaculture:worm` is registered as a Tide bait with `+1` speed, while remaining the original Aquaculture item so its existing recipes, loot, and other acquisition methods are unchanged. Its stack size is changed to 1 globally, and Tide rod bait storage plus the Aquaculture tackle box enforce the same limit. A successful Tide catch damages each stored worm by 1 durability instead of shrinking its stack; a worm is removed when its 20 durability is exhausted. Other Tide baits retain their normal count-based consumption.
 
@@ -50,7 +50,7 @@ Use JDK 21:
 .\gradlew.bat build
 ```
 
-The output is `build/libs/fishing_rod_compat-0.9.0.jar`.
+The output is `build/libs/fishing_rod_compat-1.0.jar`.
 
 Copy that JAR into the instance's `mods` directory alongside Tide and Aquaculture. The included files under `libs` are compile/runtime dependencies for the development project and are not bundled into the output JAR.
 

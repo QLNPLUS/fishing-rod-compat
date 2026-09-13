@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0
+
+### Changed
+
+- Adjusted the Neptunium rod's Tide lure-speed bonus to match Tide's nonlinear bite timer.
+- Clarified that hook durability-saving effects protect the fishing rod.
+
 ## 0.9.1
 
 ### Fixed

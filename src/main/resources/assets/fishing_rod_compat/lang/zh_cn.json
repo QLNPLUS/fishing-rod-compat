@@ -22,6 +22,6 @@
   "text.fishing_rod_compat.aquaculture_double_hook": "10% 几率额外获得一次收获",
   "text.fishing_rod_compat.aquaculture_redstone_hook": "延长咬钩后的反应窗口",
   "text.fishing_rod_compat.aquaculture_note_hook": "咬钩时播放音符",
-  "text.fishing_rod_compat.aquaculture_nether_star_hook": "可在熔岩中钓鱼，运气 +1，50% 几率不消耗耐久",
+  "text.fishing_rod_compat.aquaculture_nether_star_hook": "可在熔岩中钓鱼，运气 +1，50% 几率不消耗鱼竿耐久",
   "text.fishing_rod_compat.neptunium_bonus": "鱼更容易咬钩"
 }

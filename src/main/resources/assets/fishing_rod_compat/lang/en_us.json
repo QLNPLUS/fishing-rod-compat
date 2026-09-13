@@ -22,6 +22,6 @@
   "text.fishing_rod_compat.aquaculture_double_hook": "10% chance to get an extra catch",
   "text.fishing_rod_compat.aquaculture_redstone_hook": "Extends the catch reaction window",
   "text.fishing_rod_compat.aquaculture_note_hook": "Plays a note when fish bite",
-  "text.fishing_rod_compat.aquaculture_nether_star_hook": "Works in lava, +1 luck, 50% chance to prevent durability loss",
+  "text.fishing_rod_compat.aquaculture_nether_star_hook": "Works in lava, +1 luck, 50% chance to prevent rod durability loss",
   "text.fishing_rod_compat.neptunium_bonus": "Fish bite more easily"
 }
