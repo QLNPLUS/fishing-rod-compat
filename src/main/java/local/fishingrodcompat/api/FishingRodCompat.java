@@ -1,5 +1,7 @@
 package local.fishingrodcompat.api;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import local.fishingrodcompat.adapter.TideRodEquipmentHandler;
 import com.teammetallurgy.aquaculture.init.AquaItems;
 import com.li64.tide.data.rods.CustomRodManager;
@@ -19,9 +21,11 @@ public final class FishingRodCompat {
     /** Tide uses a nonlinear lure-speed scale, so Neptunium gets a small native-scale bonus. */
     public static final int NEPTUNIUM_LURE_SPEED_BONUS = 1;
 
+
     private static final Set<String> DISABLED_AQUACULTURE_RECIPE_PATHS = Set.of(
             "iron_fishing_rod",
             "golden_fishing_rod",
+            "gold_fishing_rod",
             "diamond_fishing_rod",
             "neptunium_fishing_rod",
             "fishing_line",
@@ -35,6 +39,24 @@ public final class FishingRodCompat {
             "redstone_hook",
             "note_hook",
             "nether_star_hook"
+    );
+
+    private static final Set<String> DISABLED_AQUACULTURE_ITEM_IDS = Set.of(
+            "aquaculture:iron_fishing_rod",
+            "aquaculture:gold_fishing_rod",
+            "aquaculture:diamond_fishing_rod",
+            "aquaculture:neptunium_fishing_rod",
+            "aquaculture:fishing_line",
+            "aquaculture:bobber",
+            "aquaculture:iron_hook",
+            "aquaculture:gold_hook",
+            "aquaculture:diamond_hook",
+            "aquaculture:light_hook",
+            "aquaculture:heavy_hook",
+            "aquaculture:double_hook",
+            "aquaculture:redstone_hook",
+            "aquaculture:note_hook",
+            "aquaculture:nether_star_hook"
     );
 
     private FishingRodCompat() {
@@ -122,9 +144,31 @@ public final class FishingRodCompat {
                 || stack.getItem() == AquaItems.NETHER_STAR_HOOK.get();
     }
 
-    public static boolean isDisabledAquacultureRecipe(net.minecraft.resources.ResourceLocation id) {
-        return id.getNamespace().equals("aquaculture")
-                && DISABLED_AQUACULTURE_RECIPE_PATHS.contains(id.getPath());
+    public static boolean isDisabledAquacultureRecipe(ResourceLocation id, JsonElement recipe) {
+        if (!id.getNamespace().equals("aquaculture")) {
+            return false;
+        }
+        if (DISABLED_AQUACULTURE_RECIPE_PATHS.contains(id.getPath())) {
+            return true;
+        }
+        if (recipe == null || !recipe.isJsonObject()) {
+            return false;
+        }
+
+        JsonObject result = recipe.getAsJsonObject().getAsJsonObject("result");
+        if (result == null) {
+            return false;
+        }
+
+        for (String key : new String[]{"id", "item"}) {
+            JsonElement item = result.get(key);
+            if (item != null && item.isJsonPrimitive()
+                    && item.getAsJsonPrimitive().isString()
+                    && DISABLED_AQUACULTURE_ITEM_IDS.contains(item.getAsString())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static boolean isTideHandler(IItemHandler handler) {

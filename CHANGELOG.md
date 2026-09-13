@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.1
+
+### Fixed
+
+- Fixed Aquaculture fishing-rod recipes so they craft the Tide-based replacement rods instead of the disabled original rods.
+- Covered both recipe ID naming variants used by Aquaculture, including gold_fishing_rod and golden_fishing_rod.
+
 ## 1.0
 
 ### Changed

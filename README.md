@@ -2,9 +2,11 @@
 
 NeoForge 1.21.1 compatibility mod for Tide 2.1.1 and Aquaculture 2.7.21.
 
-## Version 1.0
+## Version 1.0.1
 
 This version replaces Aquaculture's fishing rods and tackle accessories with separate items that use Tide's fishing system while keeping Aquaculture's appearance. The original Aquaculture rods, bobber, line, and hooks are hidden, cannot be used in the tackle box, and their recipes are removed from the loaded recipe list.
+
+Version 1.0.1 also fixes Aquaculture recipe loading so the replacement rods are the craftable results for all four rod tiers.
 
 The replacement rods use Tide's native bait list, accessories, fishing entities, fishing tables, conditions, minigame, and bait-slot tooltip. The Diamond rod has two bait slots, and the Neptunium rod has four bait slots. Both keep their corresponding Aquaculture rod durability. The Neptunium rod adds `+1` Tide lure speed when it creates the Tide fishing hook, making fish bite sooner without forcing Tide's minimum bite timer. Its tooltip uses Tide's gold bonus-text style.
 
@@ -50,7 +52,7 @@ Use JDK 21:
 .\gradlew.bat build
 ```
 
-The output is `build/libs/fishing_rod_compat-1.0.jar`.
+The output is `build/libs/fishing_rod_compat-1.0.1.jar`.
 
 Copy that JAR into the instance's `mods` directory alongside Tide and Aquaculture. The included files under `libs` are compile/runtime dependencies for the development project and are not bundled into the output JAR.
 
