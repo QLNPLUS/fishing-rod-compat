@@ -21,7 +21,6 @@ public final class FishingRodCompat {
     /** Tide uses a nonlinear lure-speed scale, so Neptunium gets a small native-scale bonus. */
     public static final int NEPTUNIUM_LURE_SPEED_BONUS = 1;
 
-
     private static final Set<String> DISABLED_AQUACULTURE_RECIPE_PATHS = Set.of(
             "iron_fishing_rod",
             "golden_fishing_rod",
