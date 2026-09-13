@@ -18,8 +18,8 @@ import java.util.Set;
 public final class FishingRodCompat {
     public static final String AQUACULTURE_HOOK_PREFIX = "aquaculture_";
 
-    /** Tide's lure-speed scale is much smaller than Aquaculture's old tick-based scale. */
-    public static final int NEPTUNIUM_LURE_SPEED_BONUS = 10;
+    /** Tide uses a nonlinear lure-speed scale, so Neptunium gets a small native-scale bonus. */
+    public static final int NEPTUNIUM_LURE_SPEED_BONUS = 1;
 
     private static final Set<String> DISABLED_AQUACULTURE_RECIPE_PATHS = Set.of(
             "iron_fishing_rod",
