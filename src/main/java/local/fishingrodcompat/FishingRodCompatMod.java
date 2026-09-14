@@ -1,10 +1,13 @@
 package local.fishingrodcompat;
 
 import local.fishingrodcompat.compat.StardewFishingCompat;
+import local.fishingrodcompat.config.FishingRodCompatConfig;
 import local.fishingrodcompat.registry.CompatItems;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraft.core.registries.Registries;
@@ -22,9 +25,13 @@ public final class FishingRodCompatMod {
             ResourceLocation.fromNamespaceAndPath("tide", "tide")
     );
 
-    public FishingRodCompatMod(IEventBus modEventBus) {
+    public FishingRodCompatMod(IEventBus modEventBus, ModContainer modContainer) {
         CompatItems.ITEMS.register(modEventBus);
         modEventBus.addListener(FishingRodCompatMod::addCreativeItems);
+
+        // Common config: the compatibility patches under [fixes] are decided by the server, and
+        // the fishing hook runs on both sides, so a common config keeps them in step.
+        modContainer.registerConfig(ModConfig.Type.COMMON, FishingRodCompatConfig.SPEC);
 
         if (ModList.get().isLoaded("stardew_fishing")) {
             NeoForge.EVENT_BUS.register(StardewFishingCompat.INSTANCE);

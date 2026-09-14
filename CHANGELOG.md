@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.0.2
+
+### Added
+
+- Added a config file, `config/fishing_rod_compat-common.toml`, with a `[fixes]` section for compatibility patches that only exist because an upstream mod is currently broken.
+- Added `fixes.stardew_hook_crash_guard` (default `true`). Set it to `false` to restore Tide's own behaviour, so the mod can stay installed after upstream fixes the bug.
+
+### Fixed
+
+- Fixed a crash that took down the world save when Tide and Stardew Fishing were installed together. `TideFishingHook.catchingFish()` passed the player's fishing hook to Stardew Fishing without checking it, so a bobber whose hook link had broken threw a NullPointerException out of the entity tick. The reward lookup is now skipped for such a bobber, and a warning naming the bobber is logged once.
+- Removed a stale `fishing_rod_compat.mixins.json` from the project root. It was a left-over copy listing only 15 mixins, was not read by the build, and could easily be edited by mistake.
+
 ## 1.0.1
 
 ### Fixed
