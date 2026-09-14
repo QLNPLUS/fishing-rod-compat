@@ -1,6 +1,7 @@
 package local.fishingrodcompat;
 
 import local.fishingrodcompat.compat.StardewFishingCompat;
+import local.fishingrodcompat.config.FishingRodCompatConfig;
 import local.fishingrodcompat.registry.CompatItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -10,7 +11,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.ModList;
 
@@ -30,6 +33,10 @@ public final class FishingRodCompatMod {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         CompatItems.ITEMS.register(modEventBus);
         modEventBus.addListener(FishingRodCompatMod::addCreativeItems);
+
+        // Common config: the compatibility patches under [fixes] are decided by the server, and
+        // the fishing hook runs on both sides, so a common config keeps them in step.
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, FishingRodCompatConfig.SPEC);
 
         if (ModList.get().isLoaded("stardew_fishing")) {
             MinecraftForge.EVENT_BUS.register(StardewFishingCompat.INSTANCE);
