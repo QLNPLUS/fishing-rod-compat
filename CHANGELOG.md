@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.3
+
+### Fixed
+
+- Fixed the Aquaculture tackle box refusing the replacement hooks, fishing lines, and bobbers in its four accessory slots. The `tide:hooks`, `tide:lines`, and `tide:bobbers` tags were shipped under `data/tide/tags/item/`, but Minecraft 1.20.1 reads item tags from `data/tide/tags/items/`, so the tags were loading empty and every slot check failed. The bait slot was unaffected because bait is matched through Tide's bait data rather than a tag.
+- The `tide:fishing_rods` tag had the same path problem, so the replacement rods were never actually part of it. They now are, which restores the tag-driven rod behaviour that other mods and datapacks read.
+- Removed `data/fishing_rod_compat/recipe/`, a left-over copy of the recipes in the 1.21.1 `"result": {"id": ...}` format. 1.20.1 requires `"result": {"item": ...}` and reads recipes from `recipes/`, so this folder only produced parse errors and duplicate recipe IDs. The corrected `recipes/` folder from 1.0.1 is untouched.
+
 ## 1.0.2
 
 ### Added
