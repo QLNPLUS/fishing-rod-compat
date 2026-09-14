@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Fixed
+
+- Hardened `FishingRodCompat.isDisabledAquacultureRecipe` so it type-checks a recipe's `result` element before reading it. Gson throws a `ClassCastException` instead of returning null when the element is not a JSON object, and Aquaculture ships nine recipes whose `result` is a bare string on 1.20.1, where this aborted the entire recipe reload. Aquaculture 1.21.1 currently ships no such recipe, so this branch was not crashing, but it carried the identical code.
+
 ## 1.0.2
 
 ### Added
