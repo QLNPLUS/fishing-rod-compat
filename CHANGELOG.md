@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.4
+
+### Fixed
+
+- Fixed a crash while loading or reloading recipes that made the game unusable. `FishingRodCompat.isDisabledAquacultureRecipe` called `JsonElement.getAsJsonObject()` on a recipe's `result` without checking its type first. Gson throws a `ClassCastException` rather than returning null when the element is not an object, and Aquaculture ships nine recipes whose `result` is a bare string (smelting, blasting, smoking and campfire cooking recipes). Reaching any one of them aborted the recipe reload, which happens on world load and on creating a world. The `result` element is now type-checked before use.
+- This bug was present in 1.0.2 and earlier as well; it surfaced depending on which recipe was visited first.
+
 ## 1.0.3
 
 ### Fixed
