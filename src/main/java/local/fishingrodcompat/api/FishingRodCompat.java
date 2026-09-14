@@ -154,10 +154,16 @@ public final class FishingRodCompat {
             return false;
         }
 
-        JsonObject result = recipe.getAsJsonObject().getAsJsonObject("result");
-        if (result == null) {
+        // "result" is an object for shaped/shapeless recipes but a bare string for cooking
+        // recipes such as smelting, blasting, smoking and campfire cooking. JsonElement
+        // throws instead of returning null when the element is not an object, so the type has
+        // to be checked before casting - Aquaculture ships nine string-result recipes, and
+        // calling getAsJsonObject() on one of them aborts the whole recipe reload.
+        JsonElement resultElement = recipe.getAsJsonObject().get("result");
+        if (resultElement == null || !resultElement.isJsonObject()) {
             return false;
         }
+        JsonObject result = resultElement.getAsJsonObject();
 
         for (String key : new String[]{"id", "item"}) {
             JsonElement item = result.get(key);
