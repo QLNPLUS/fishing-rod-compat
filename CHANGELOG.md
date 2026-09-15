@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.0
+
+### Fixed
+
+- When AutoFish is active, opening a non-pausing inventory or container screen now reels in an active Tide fishing hook and lets AutoFish cast again using its configured delays.
+- Applied the Tide and AutoFish screen compatibility fix to the NeoForge 1.21.1 release.
+
 ## Unreleased
 
 ### Fixed

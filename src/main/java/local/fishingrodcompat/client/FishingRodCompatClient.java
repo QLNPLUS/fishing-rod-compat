@@ -8,6 +8,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.common.NeoForge;
 
 @EventBusSubscriber(
         modid = FishingRodCompatMod.MOD_ID,
@@ -20,6 +21,8 @@ public final class FishingRodCompatClient {
 
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
+        NeoForge.EVENT_BUS.addListener(AutoFishScreenCycle::onScreenOpening);
+        NeoForge.EVENT_BUS.addListener(AutoFishScreenCycle::onClientTick);
         event.enqueueWork(() -> {
             registerCastProperty(CompatItems.AQUACULTURE_IRON_FISHING_ROD);
             registerCastProperty(CompatItems.AQUACULTURE_GOLD_FISHING_ROD);
