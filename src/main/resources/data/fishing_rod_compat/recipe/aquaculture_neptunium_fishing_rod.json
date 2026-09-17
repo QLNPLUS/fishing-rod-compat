@@ -19,7 +19,7 @@
       "tag": "c:rods/wooden"
     },
     "N": {
-      "tag": "c:ingots/neptunium"
+      "item": "aquaculture:neptunium_ingot"
     }
   },
   "result": {
