@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.2.0
+
+### Fixed
+
+- Removed the screen-opening reel-in trigger on Forge 1.20.1 so AutoFish can continue fishing in the background while an inventory or container screen is open.
+- Added the wooden-rod tag entry for vanilla sticks so the replacement fishing-rod recipes recognize them.
+- Changed the Neptunium fishing-rod recipe to use Aquaculture's Neptunium ingot item directly.
+
 ## 1.1.0
 
 ### Fixed
