@@ -1,17 +1,12 @@
 # Changelog
 
-## 1.1.0
+## 1.2.0
 
 ### Fixed
 
-- When AutoFish is active, opening a non-pausing inventory or container screen now reels in an active Tide fishing hook and lets AutoFish cast again using its configured delays.
-- Applied the Tide and AutoFish screen compatibility fix to the NeoForge 1.21.1 release.
-
-## Unreleased
-
-### Fixed
-
-- Hardened `FishingRodCompat.isDisabledAquacultureRecipe` so it type-checks a recipe's `result` element before reading it. Gson throws a `ClassCastException` instead of returning null when the element is not a JSON object, and Aquaculture ships nine recipes whose `result` is a bare string on 1.20.1, where this aborted the entire recipe reload. Aquaculture 1.21.1 currently ships no such recipe, so this branch was not crashing, but it carried the identical code.
+- AutoFish continues fishing in the background while an inventory or container screen is open instead of triggering a reel-in.
+- Hardened recipe reload compatibility when an upstream recipe uses a non-object result format.
+- Changed the Neptunium fishing-rod recipe to use Aquaculture's Neptunium ingot item directly.
 
 ## 1.0.2
 
