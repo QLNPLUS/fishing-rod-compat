@@ -17,7 +17,7 @@ on:
       version:
         description: Mod version for a manual publish
         required: true
-        default: 1.2.0
+        default: 1.2.1
         type: string
 
 permissions:
