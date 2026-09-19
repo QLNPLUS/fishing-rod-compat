@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.1
+
+### Fixed
+
+- Kept the NeoForge 1.21.1 replacement recipes compatible with NeoForge's common material tags.
+
 ## 1.2.0
 
 ### Fixed
