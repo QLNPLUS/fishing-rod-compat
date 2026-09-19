@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.1
+
+### Fixed
+
+- Fixed the Light Hook recipe to use the vanilla feather item directly.
+- Fixed the Nether Star Hook recipe to use the vanilla Nether Star item directly.
+
 ## 1.2.0
 
 ### Fixed
