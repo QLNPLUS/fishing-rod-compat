@@ -20,6 +20,7 @@
     "BaitContentsMutableAccessor",
     "AquacultureWormStackSizeMixin",
     "TideFishingHookEffectsMixin",
+    "TideFishingHookLinkRecoveryMixin",
     "TideFishingHookStardewGuardMixin",
     "TideFishingBobberItemMixin",
     "TideFishingHookItemMixin",

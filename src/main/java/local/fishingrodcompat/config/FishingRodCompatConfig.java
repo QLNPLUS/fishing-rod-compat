@@ -28,8 +28,13 @@ public final class FishingRodCompatConfig {
         return FIXES.stardewHookCrashGuard.get();
     }
 
+    public static boolean tideHookLinkRecovery() {
+        return FIXES.tideHookLinkRecovery.get();
+    }
+
     public static final class Fixes {
         public final ForgeConfigSpec.BooleanValue stardewHookCrashGuard;
+        public final ForgeConfigSpec.BooleanValue tideHookLinkRecovery;
 
         private Fixes(ForgeConfigSpec.Builder builder) {
             builder.comment(
@@ -51,6 +56,25 @@ public final class FishingRodCompatConfig {
                             "Set to false if a newer Tide or Stardew Fishing release fixes this itself."
                     )
                     .define("stardew_hook_crash_guard", true);
+
+            tideHookLinkRecovery = builder
+                    .comment(
+                            "Tide 2.1.1: the active bobber is stored in Player.fishing, a single field",
+                            "shared by vanilla and every fishing mod. If the field is cleared or taken",
+                            "over while the Tide bobber is still alive, the bobber becomes unreachable:",
+                            "the rod reels in nothing, new casts cannot link to the player, and the",
+                            "stray bobber floats forever until the player relogs.",
+                            "",
+                            "true  - re-link a live bobber whose owner link went missing, and ignore a",
+                            "        foreign hook sitting in that slot instead of failing to link",
+                            "false - leave the state exactly as Tide leaves it",
+                            "",
+                            "Keep this enabled when a fishing-automation or third-party fishing mod",
+                            "manages Player.fishing directly.",
+                            "",
+                            "Set to false if a newer Tide release manages the owner link itself."
+                    )
+                    .define("tide_hook_link_recovery", true);
 
             builder.pop();
         }

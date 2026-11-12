@@ -4,10 +4,10 @@
 
 | Branch | Worktree | Loader | Minecraft | JDK | Gradle | Build plugin |
 |---|---|---|---|---:|---|---|
-| `main` | `D:\projects\fishing_rod_compat-neoforge-1.21.1` | NeoForge | 1.21.1 | 21 | 8.8 | ModDevGradle 2.0.141 |
-| `codex/forge-1.20.1` | `D:\projects\fishing_rod_compat-forge-1.20.1` | Forge | 1.20.1 | 17 | 8.8 | ForgeGradle 6.x |
+| `main` | `D:\projects\fishing_rod_compat\neoforge-1.21.1` | NeoForge | 1.21.1 | 21 | 8.8 | ModDevGradle 2.0.141 |
+| `codex/forge-1.20.1` | `D:\projects\fishing_rod_compat\forge-1.20.1` | Forge | 1.20.1 | 17 | 8.8 | ForgeGradle 6.x |
 
-`main` is the current GitHub default branch and the primary NeoForge worktree. The Forge worktree is a linked worktree. Each branch has its own loader-specific build and local dependency artifacts.
+`D:\projects\fishing_rod_compat` is the single repository container. `neoforge-1.21.1` is the main worktree and owns the shared `.git` directory; `forge-1.20.1` is a linked worktree nested inside it (`git worktree list` from either directory). Each branch has its own loader-specific build and local dependency artifacts.
 
 ## Change Propagation
 
