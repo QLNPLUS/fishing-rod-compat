@@ -4,11 +4,16 @@ import com.li64.tide.registries.items.TideFishingRodItem;
 import local.fishingrodcompat.adapter.TideRodAccessoryBridge;
 import local.fishingrodcompat.api.FishingRodCompat;
 import local.fishingrodcompat.api.RodAccessorySlot;
+import local.fishingrodcompat.compat.TideHookLinkRecovery;
+import local.fishingrodcompat.config.FishingRodCompatConfig;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -18,6 +23,26 @@ import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 @Mixin(value = TideFishingRodItem.class, remap = false)
 public abstract class TideFishingRodItemMixin {
+    /**
+     * Drops a dead bobber link before the rod decides whether it is casting or reeling in.
+     * Without this, a stale {@code Player.fishing} value makes the rod take the reeling path and
+     * never cast again until the player relogs.
+     */
+    @Inject(method = "use", at = @At("HEAD"), remap = false)
+    private void fishingRodCompat$repairHookLink(
+            Level level,
+            Player player,
+            InteractionHand hand,
+            CallbackInfoReturnable<InteractionResultHolder<ItemStack>> callbackInfo
+    ) {
+        if (!FishingRodCompatConfig.tideHookLinkRecovery()) {
+            return;
+        }
+        if (FishingRodCompat.isTideRod(player.getItemInHand(hand))) {
+            TideHookLinkRecovery.clearStaleLink(player, level.isClientSide);
+        }
+    }
+
     @Inject(method = "overrideOtherStackedOnMe", at = @At("HEAD"), cancellable = true, remap = false)
     private void fishingRodCompat$insertBobber(
             ItemStack rod,

@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.2.2
+
+### Fixed
+
+- Fixed Tide bobbers that were stranded in the water and could not be reeled in. The active bobber is stored in `Player.fishing`, a single field shared by vanilla and every fishing mod, and Tide only links a bobber while that field is empty. When another mod or an auto-fishing tool cleared or replaced it while the bobber was still alive, the bobber became unreachable: the rod reeled in nothing, new casts produced unlinked bobbers, and only relogging recovered. A missing owner link on a live bobber is now restored, and a link that can no longer reach a live Tide hook is dropped before the rod decides to cast or reel in.
+- A foreign (non-Tide) hook sitting in `Player.fishing` no longer makes Tide's owner cleanup throw a `ClassCastException`, which could stop a bobber from ever being discarded.
+- The Stardew Fishing hook-link guard now restores the missing link instead of only skipping the reward lookup, so a catch is not silently lost for a tick.
+- Added `fixes.tide_hook_link_recovery` (default `true`) to turn the recovery off and restore Tide's original behaviour.
+
 ## 1.2.1
 
 ### Fixed

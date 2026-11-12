@@ -4,7 +4,9 @@ import com.li64.tide.Tide;
 import com.li64.tide.compat.CompatHelper;
 import com.li64.tide.registries.entities.misc.fishing.HookAccessor;
 import com.li64.tide.registries.entities.misc.fishing.TideFishingHook;
+import local.fishingrodcompat.compat.TideHookLinkRecovery;
 import local.fishingrodcompat.config.FishingRodCompatConfig;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -52,6 +54,18 @@ public abstract class TideFishingHookStardewGuardMixin {
             remap = false
     )
     private List<ItemStack> fishingRodCompat$guardStardewRewards(HookAccessor hook) {
+        TideFishingHook self = (TideFishingHook) (Object) this;
+
+        if (hook == null && FishingRodCompatConfig.tideHookLinkRecovery()) {
+            // The link can be restored while the bobber is still alive, which keeps the catch
+            // instead of silently dropping the rewards for one tick.
+            TideHookLinkRecovery.ensureLinked(self, false);
+            Player owner = self.getPlayerOwner();
+            if (owner != null && owner.fishing instanceof HookAccessor accessor) {
+                hook = accessor;
+            }
+        }
+
         if (hook != null) {
             return CompatHelper.stardewFishingGetRewards(hook);
         }
@@ -66,10 +80,11 @@ public abstract class TideFishingHookStardewGuardMixin {
             fishingRodCompat$brokenHookLinkWarned = true;
             Tide.LOG.warn(
                     "Tide fishing bobber {} has no linked hook on its owner; skipping the Stardew"
-                            + " Fishing reward lookup to avoid a crash. Retrieve the bobber to clear"
-                            + " this state. Set fixes.stardew_hook_crash_guard=false in the"
+                            + " Fishing reward lookup to avoid a crash. The owner link could not be"
+                            + " restored (the player is not holding the rod or another live hook owns"
+                            + " the slot). Set fixes.stardew_hook_crash_guard=false in the"
                             + " fishing_rod_compat config to restore Tide's original behaviour.",
-                    ((TideFishingHook) (Object) this).getUUID()
+                    self.getUUID()
             );
         }
         return List.of();
